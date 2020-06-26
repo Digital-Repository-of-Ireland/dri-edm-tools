@@ -1,5 +1,5 @@
 # dri-edm-tools
-Scripts for working with an OAI-PMH EDM feed. Includes a tool to export individual xml files (one per object) from the OAI-PMH EDM feed. This can be zipped and used as an alternative submission method, and can also be used with tools such as the Metis Sandbox https://metis-sandbox.eanadev.org/metis-sandbox-rest-production/swagger-ui.html#/dataset-controller
+Scripts for working with an OAI-PMH EDM feed used to aggregate content to the Europeana platform. Includes a tool to export individual xml files (one per object) from the OAI-PMH EDM feed. This can be zipped and used as an alternative submission method, and can also be used with tools such as the Metis Sandbox https://metis-sandbox.eanadev.org/metis-sandbox-rest-production/swagger-ui.html#/dataset-controller
 
 This was developed for use with the Digital Repository of Ireland's aggregation service, but there is no reason that it should not work for other aggregators.
 
