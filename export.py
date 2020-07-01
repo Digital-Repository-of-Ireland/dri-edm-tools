@@ -5,7 +5,7 @@ import os
 import tempfile
 import re
 from urllib import request, parse
-import xml.etree.ElementTree as ET
+from lxml import etree as ET
 
 gui = True
 try:
