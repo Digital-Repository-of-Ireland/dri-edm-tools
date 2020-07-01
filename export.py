@@ -3,7 +3,6 @@
 import argparse
 import os
 import tempfile
-import re
 from urllib import request, parse
 from lxml import etree as ET
 
