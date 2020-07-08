@@ -44,7 +44,7 @@ def setup():
         endpoint = args.endpoint or simpledialog.askstring("endpoint",
                                     "Enter the OAI endpoint",
                                     parent=app)
-        outputdir = args.outputdir or filedialog.askdirectory(outputdir = ".",
+        outputdir = args.outputdir or filedialog.askdirectory(initialdir = ".",
                                     title = "Select output diretory")
     else:
         endpoint = args.endpoint or input("Please enter the OAI endpoint  ")
