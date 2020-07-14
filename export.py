@@ -37,6 +37,7 @@ def setup():
 
     if gui:
         app = Tk()
+        app.title("DRI EDM Export")
         canvas = Canvas(app, width = 100, height = 100)
         canvas.pack()      
         img = PhotoImage(file="./assets/dri_ident_tiny.png")      
