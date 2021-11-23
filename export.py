@@ -105,7 +105,7 @@ def split_files(tmpdir, outputdir):
         rdfs = root.findall(".//{http://www.w3.org/1999/02/22-rdf-syntax-ns#}RDF")
         filecount = 1
         for entry in rdfs:
-            filename = (entry[0].attrib['{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about'])
+            filename = (entry[0].attrib['{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about']).replace("#","")
             outfile = os.path.join(outputdir, filename + ".xml")
             ET.ElementTree(entry).write(outfile, encoding='utf-8', xml_declaration=True)
 
