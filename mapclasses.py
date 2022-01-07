@@ -85,7 +85,6 @@ def convert(inputdir, outputdir, geonameskey):
                     q = ('SELECT ?label WHERE { '
                     '<'+resource+'> '
                     '<http://www.w3.org/2004/02/skos/core#prefLabel> ?label .}')
-                    print("subject "+q)
                     result = sparql.query('http://vocab.getty.edu/sparql', q)
                 elif ("wikidata" in resource):
                     item = re.search('https?://www.wikidata.org/wiki/(Q.*)$', resource).group(1)
@@ -139,7 +138,6 @@ def convert(inputdir, outputdir, geonameskey):
                     q = ('SELECT ?label WHERE { '
                     '<'+resource+'> '
                     '<http://www.w3.org/2004/02/skos/core#prefLabel> ?label .}')
-                    print("type "+q)
                     result = sparql.query('http://vocab.getty.edu/sparql', q)
                 elif ("wikidata" in resource):
                     item = re.search('https?://www.wikidata.org/wiki/(Q.*)$', resource).group(1)
