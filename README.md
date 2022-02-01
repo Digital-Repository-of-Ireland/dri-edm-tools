@@ -6,7 +6,9 @@ The scripts are written in python and bash. We've tried to make them somewhat cr
 Includes:
 - check.py - given an OAI-PMH EDM endpoint, checks that all of the records contain a metadata element and gives a report on missing elements.
 - export.py - given an OIA-PMH EDM endpoint, downloads the OAI-PMH feed and splits out the EDM records into individual files
-- 
+- add-isPartOf.sh - adds an isPartOf element with the project code, used for project reporting
+- move-urls-to-resources.sh - takes linked-data URIs from the text of an element to an rdf:resource attribute of that element
+- mapclasses.py - creates EDM Contextual classes when it finds relevant linked-data URIs in certain enabling element fields according to the Europeana Publishing Framework Metadata quality rules
 
 
 # Installation
