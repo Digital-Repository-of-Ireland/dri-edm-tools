@@ -1,9 +1,17 @@
 # dri-edm-tools
-Scripts for working with an OAI-PMH EDM feed used to aggregate content to the Europeana platform. Includes a tool to export individual xml files (one per object) from the OAI-PMH EDM feed. This can be zipped and used as an alternative submission method, and can also be used with tools such as the Metis Sandbox https://metis-sandbox.eanadev.org/metis-sandbox-rest-production/swagger-ui.html#/dataset-controller
+This repo holds a number of scripts for working with Europeana EDM metadata. They were developed for use with the Digital Repository of Ireland's aggregation service, but they may prove useful for other aggregators.
 
-This was developed for use with the Digital Repository of Ireland's aggregation service, but there is no reason that it should not work for other aggregators.
+The scripts are written in python and bash. We've tried to make them somewhat cross-platform, but they were mainly written and tested for Linux.
+
+Includes:
+- check.py - given an OAI-PMH EDM endpoint, checks that all of the records contain a metadata element and gives a report on missing elements.
+- export.py - given an OIA-PMH EDM endpoint, downloads the OAI-PMH feed and splits out the EDM records into individual files
+- 
+
 
 # Installation
+Install a Linux Bash shell for your system.
+
 Install Python 3 for your system.
 
 To use the Graphical User Interface install the Python 3 Tkinter module.
@@ -11,12 +19,22 @@ To use the Graphical User Interface install the Python 3 Tkinter module.
 Clone the repository from Github.
 
 # Running
+
+## check.py
+To check the EDM OAI-PMH feed run check.py from the command line (currently the report won't display via the GUI).
+
+Command-line parameters are --endpoint. If you don't pass the endpoint you will be prompted for it.
+
+The script will print a report identifying any records which have no metadata.
+
 ## export.py
 To export an EDM OAI-PMH feed to xml files run the export.py file by double clicking, or running from the command line.
 
 Optional command-line parameters are --endpoint and --outputdir
 
 If you do not pass the endpoint and outputdir on the command line you will be prompted to enter or select them. If you have Tkinter installed you can select these via a Graphical User Interface, otherwise they can be typed in on the command line.
+
+The output can be zipped and used as an alternative submission method, and can also be used with tools such as the Metis Sandbox https://metis-sandbox.eanadev.org/metis-sandbox-rest-production/swagger-ui.html#/dataset-controller
 
 ## add-isPartOf.sh
 To add a dcterms:isPartOf field to identify records for a particular project use the add-isPartOf.sh script. 
