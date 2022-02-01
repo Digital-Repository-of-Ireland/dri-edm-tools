@@ -103,7 +103,6 @@ def split_files(tmpdir, outputdir):
         xml = ET.parse(infile)
         root = xml.getroot()
         rdfs = root.findall(".//{http://www.w3.org/1999/02/22-rdf-syntax-ns#}RDF")
-        filecount = 1
         for entry in rdfs:
             filename = (entry[0].attrib['{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about']).replace("#","")
             outfile = os.path.join(outputdir, filename + ".xml")
