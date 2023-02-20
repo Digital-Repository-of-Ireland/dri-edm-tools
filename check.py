@@ -114,8 +114,10 @@ def check_files(tmpdir):
 #TODO: should be modified to work with GUI and maybe write the report to disk
 def print_report(valid, invalid):
 
+    print("\n\n========= EDM Check ==================")
     print("Valid EDM records: "+str(valid))
     print("Invalid EDM records: "+str(len(invalid)))
+    print("\n")
 
     for id in invalid:
         print(id.replace("oai:dri:", "https://repository.dri.ie/catalog/"))
