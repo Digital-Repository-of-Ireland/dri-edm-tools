@@ -5,6 +5,8 @@ import os
 import tempfile
 from urllib import request, parse
 from lxml import etree as ET
+import sys
+import time
 
 gui = True
 try:
@@ -18,6 +20,12 @@ global img
 
 def main():
     endpoint, outputdir = setup()
+    spinner = spinning_cursor()
+    for _ in range(50):
+        sys.stdout.write(next(spinner))
+        sys.stdout.flush()
+        time.sleep(0.1)
+        sys.stdout.write('\b')
     with tempfile.TemporaryDirectory() as tmpdir:
         get_edm(endpoint, tmpdir)
         split_files(tmpdir, outputdir)
@@ -108,6 +116,12 @@ def split_files(tmpdir, outputdir):
             outfile = os.path.join(outputdir, filename + ".xml")
             ET.ElementTree(entry).write(outfile, encoding='utf-8', xml_declaration=True)
 
+
+# Spinning Cursor
+def spinning_cursor():
+    while True:
+        for cursor in '|/-\\':
+            yield cursor
 
 
 if __name__ == '__main__':

@@ -5,6 +5,8 @@ import os
 import tempfile
 from urllib import request, parse
 from lxml import etree as ET
+import sys
+import time
 
 gui = True
 try:
@@ -17,6 +19,12 @@ global img
 
 def main():
     endpoint = setup()
+    spinner = spinning_cursor()
+    for _ in range(50):
+        sys.stdout.write(next(spinner))
+        sys.stdout.flush()
+        time.sleep(0.1)
+        sys.stdout.write('\b')
     with tempfile.TemporaryDirectory() as tmpdir:
         get_edm(endpoint, tmpdir)
         check_files(tmpdir)
@@ -94,6 +102,7 @@ def check_files(tmpdir):
     dl = os.listdir(tmpdir)
     validrecords = 0
     invalidrecords = [] 
+    missinglang = []
     for f in dl:
         infile = os.path.join(tmpdir, f)
         xml = ET.parse(infile)
@@ -101,26 +110,49 @@ def check_files(tmpdir):
         records = root.findall(".//{http://www.openarchives.org/OAI/2.0/}record")
         for entry in records:
             metadata = entry.find('{http://www.openarchives.org/OAI/2.0/}metadata')
+            edmType = metadata.find('.//{http://www.europeana.eu/schemas/edm/}type')
             if (len(metadata) == 0):
                 id = entry.find('{http://www.openarchives.org/OAI/2.0/}header').find('{http://www.openarchives.org/OAI/2.0/}identifier').text
                 invalidrecords.append(id)
+            elif edmType.text == "TEXT":
+                id = entry.find('{http://www.openarchives.org/OAI/2.0/}header').find('{http://www.openarchives.org/OAI/2.0/}identifier').text
+                lang = metadata.find('.//{http://purl.org/dc/elements/1.1/}language')
+                if lang is None:
+                    missinglang.append(id)
+                    invalidrecords.append(id)
+                else:
+                    validrecords = validrecords+1
             else:
                 validrecords = validrecords+1
                 
-    print_report(validrecords,invalidrecords)
+    print_report(validrecords,invalidrecords, missinglang)
 
 
 #Print out the results
 #TODO: should be modified to work with GUI and maybe write the report to disk
-def print_report(valid, invalid):
+def print_report(valid, invalid, missinglang):
 
     print("\n\n========= EDM Check ==================")
     print("Valid EDM records: "+str(valid))
     print("Invalid EDM records: "+str(len(invalid)))
     print("\n")
 
-    for id in invalid:
+    if len(invalid) > 0:
+        for id in invalid:
+            print(id.replace("oai:dri:", "https://repository.dri.ie/catalog/"))
+
+        print("Number of invalid TEXT records missing language: "+str(len(missinglang)))
+        print("\n")
+
+    for id in missinglang:
         print(id.replace("oai:dri:", "https://repository.dri.ie/catalog/"))
+
+
+# Spinning Cursor
+def spinning_cursor():
+    while True:
+        for cursor in '|/-\\':
+            yield cursor
 
 
 if __name__ == '__main__':
